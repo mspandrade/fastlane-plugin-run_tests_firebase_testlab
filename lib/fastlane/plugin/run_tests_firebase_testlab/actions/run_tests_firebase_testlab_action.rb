@@ -10,7 +10,7 @@ module Fastlane
       end
 
       def self.run(params)
-        UI.message("Starting Little Fifa run_tests_firebase_testlab plugin...")
+        UI.message("Starting Little Fifa run_tests_firebase_testlab plugin... ")
 
         validate_params(params)
 
