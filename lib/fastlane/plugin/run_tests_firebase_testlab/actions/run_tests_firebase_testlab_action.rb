@@ -10,7 +10,7 @@ module Fastlane
       end
 
       def self.run(params)
-        UI.message("Starting Little Fifa run_tests_firebase_testlab plugin... ")
+        UI.message("Starting Little Fifa run_tests_firebase_testlab plugin...")
 
         validate_params(params)
 
@@ -36,13 +36,15 @@ module Fastlane
           Action.sh("tee #{@test_console_output_file} < #{PIPE} & "\
                     "#{Commands.run_tests} "\
                     "--type instrumentation "\
+                    "--async "\
                     "--app #{params[:app_apk]} "\
                     "--test #{params[:android_test_apk]} "\
                     "#{create_devices_params(params)}"\
                     "--timeout #{params[:timeout]} "\
-                    "--async "\
                     "#{params[:extra_options]} > #{PIPE} 2>&1")
         ensure
+          remove_pipe_if_exists
+        end
       end
 
       def self.description
