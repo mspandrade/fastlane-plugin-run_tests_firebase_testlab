@@ -40,29 +40,9 @@ module Fastlane
                     "--test #{params[:android_test_apk]} "\
                     "#{create_devices_params(params)}"\
                     "--timeout #{params[:timeout]} "\
+                    "--async "\
                     "#{params[:extra_options]} > #{PIPE} 2>&1")
         ensure
-          remove_pipe_if_exists
-
-          UI.message("Create firebase directory (if not exists) to store test results.")
-          FileUtils.mkdir_p(params[:output_dir])
-
-          if params[:bucket_url].nil?
-            UI.message("Parse firebase bucket url.")
-            params[:bucket_url] = scrape_bucket_url
-            UI.message("bucket: #{params[:bucket_url]}")
-          end
-
-          if params[:download_results_from_firebase]
-            UI.message("Downloading instrumentation test results from Firebase Test Lab...")
-            Action.sh("#{Commands.download_results} #{params[:bucket_url]} #{params[:output_dir]}")
-          end
-
-          if params[:delete_firebase_files]
-            UI.message("Deleting files from firebase storage...")
-            Action.sh("#{Commands.delete_resuls} #{params[:bucket_url]}")
-          end
-        end
       end
 
       def self.description
