@@ -29,7 +29,7 @@ module Fastlane
         UI.message("Authenticate with Google Cloud.")
         Action.sh("#{Commands.auth} --key-file #{@client_secret_file}")
 
-        UI.message("Running instrumentation tests in Firebase Test Lab...")
+        UI.message("Little Fifa Running instrumentation tests in Firebase Test Lab...")
         remove_pipe_if_exists
         Action.sh("mkfifo #{PIPE}")
         begin
